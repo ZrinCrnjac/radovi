@@ -27,7 +27,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 ]);*/
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/home', 'App\Http\Controllers\StudentController@showTasks')->name('home');
+    //Route::get('/home', 'App\Http\Controllers\StudentController@showTasks')->name('home');
     Route::get('/admin', 'App\Http\Controllers\UserController@showUsers')->name('admin');
     Route::get('/nastavnik', 'App\Http\Controllers\NastavnikController@index')->name('nastavnik');
+
+    Route::get('/edit/{id}', 'App\Http\Controllers\UserController@edit')->name('edit');
+    Route::post('/update', 'App\Http\Controllers\UserController@update')->name('update');
 });
