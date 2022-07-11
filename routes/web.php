@@ -27,7 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 ]);*/
 
 Route::group(['middleware' => 'auth'], function() {
-    //Route::get('/home', 'App\Http\Controllers\StudentController@showTasks')->name('home');
+    Route::get('/home', 'App\Http\Controllers\StudentController@showTasks')->name('home');
     Route::get('/admin', 'App\Http\Controllers\UserController@showUsers')->name('admin');
     Route::get('/edit/{id}', 'App\Http\Controllers\UserController@edit')->name('edit');
     Route::post('/update', 'App\Http\Controllers\UserController@update')->name('update');
@@ -35,5 +35,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/nastavnik/task', 'App\Http\Controllers\NastavnikController@saveTask')->name('nastavnik.task');
     Route::get('/nastavnik/task/{id}/students', 'App\Http\Controllers\NastavnikController@showStudents')->name('nastavnik.task.students');
     Route::post('/nastavnik/task/{id}/student', 'App\Http\Controllers\NastavnikController@assignStudentTask')->name('nastavnik.task.student');
+    Route::post('/student/task', 'App\Http\Controllers\StudentController@updateTasks')->name('student.task');
 
 });
