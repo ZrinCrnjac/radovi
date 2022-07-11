@@ -44,6 +44,15 @@ class NastavnikController extends Controller
     }
 
     public function showStudents($id){
+        $task = Task::find($id);
+        return view('task_students', ['task'=>$task]);
+    }
 
+    public function assignStudentTask(Request $request, $taskId){
+        $student = $request->student;
+        $task = Task::find($taskId);
+        $task->assignee = $student;
+        $task->save();
+        return redirect()->route('nastavnik');
     }
 }

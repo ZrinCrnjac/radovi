@@ -22,4 +22,22 @@ class StudentController extends Controller
         }
         return view('home', ['data'=>$tasks]);
     }
+
+    public function updateTasks(Request $request){
+        $user = Auth::user();
+        if($request->detach!=null){
+            $task = Task::find($request->detach);
+            $user->tasks()->detach($task);
+            $request->session()->flash('message.level', 'success');
+            $request->session()->flash('message.content', 'Prijava uklonjena');
+        }
+        else if($request->attach!=null){
+            $task = Task::find($request->attach);
+            $user->tasks()->attach($task);
+            $request->session()->flash('message.level','success');
+            $request->session()->flash('message.content','Rad uspješno odabran');
+        }
+
+        return redirect()->route('home');
+    }
 }
